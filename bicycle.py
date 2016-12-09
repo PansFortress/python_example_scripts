@@ -8,7 +8,7 @@ class Bicycle(object):
 		self.cost = cost
 
 	def printDetails(self):
-		print("Model : {} \nWeight : {} \nCost : {} \
+		print("Model : {} \nWeight : {} \nCost : {} \n\
 			".format(self.model, self.weight, self.cost))
 
 class BikeStore(object):
@@ -16,6 +16,7 @@ class BikeStore(object):
 	def __init__(self, name):
 		self.name = name
 		self.bicycles = []
+		self.profit = 0
 
 	def stockBicycle(self, model, weight, cost):
 		markup_price = cost + (cost * .20)
@@ -30,6 +31,7 @@ class BikeStore(object):
 			print("No bicycles in stock")
 
 	def sellBicycle(self, bicycle):
+		self.profit += (bicycle.cost/6)
 		self.bicycles.remove(bicycle)
 
 class Customer(object):
@@ -47,7 +49,7 @@ class Customer(object):
 			pass
 
 	def showStuff(self):
-		print("name: {} \nfund : {}\nbicycle : {}".format(self.name, 
+		print("name: {} \nfund : {}\nbicycle : {}\n".format(self.name, 
 			self.fund, self.bicycle.model))
 
 def sellBike(store, customer):
@@ -55,6 +57,10 @@ def sellBike(store, customer):
 	for bike in store.bicycles:
 		if bike.cost <= customer.fund:
 			potential_bike.append(bike)
+
+#Can I do this better?
+	print("{} can afford these bikes: {}\n".format(customer.name, 
+		potential_bike))
 
 	if len(potential_bike) > 0:
 		bikeToPurchase = random.choice(potential_bike)
@@ -64,18 +70,3 @@ def sellBike(store, customer):
 		print("No Bikes to Sell to {}".format(customer.name))
 
 
-store = BikeStore("Jims")
-store.stockBicycle("Trek", 124, 500)
-store.stockBicycle("Giant", 140, 700)
-store.stockBicycle("Hurley", 150, 900)
-
-james = Customer("James", 1500)
-sarah = Customer("Sarah", 2200)
-carl = Customer("Carl", 100)
-
-sellBike(store, james)
-sellBike(store, sarah)
-sellBike(store, carl)
-
-james.showStuff();
-store.showBicycles();
