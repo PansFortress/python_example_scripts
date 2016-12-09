@@ -24,7 +24,6 @@ class BikeStore(object):
 
 	def showBicycles(self):
 		if len(self.bicycles) > 0:
-			print("THESE ARE THE BIKES IN THE STORE: ")
 			for bicycle in self.bicycles:
 				bicycle.printDetails()
 		else:

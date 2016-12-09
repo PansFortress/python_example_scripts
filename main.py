@@ -19,4 +19,5 @@ if __name__ == "__main__":
 
 	print("CUSTOMER DETAILS")
 	james.showStuff();
+	print("STORE DETAILS")
 	store.showBicycles();
