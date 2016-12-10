@@ -7,9 +7,9 @@ class Bicycle(object):
 		self.weight = weight
 		self.cost = cost
 
-	def printDetails(self):
-		print("Model : {} \nWeight : {} \nCost : {} \n\
-			".format(self.model, self.weight, self.cost))
+	def __repr__(self):
+		return("Model : {} Weight : {} Cost : {}"
+			.format(self.model, self.weight, self.cost))
 
 class BikeStore(object):
 	"""docstring for BikeStore"""
@@ -23,9 +23,9 @@ class BikeStore(object):
 		self.bicycles.append(Bicycle(model, weight, markup_price))
 
 	def showBicycles(self):
-		if len(self.bicycles) > 0:
+		if self.bicycles:
 			for bicycle in self.bicycles:
-				bicycle.printDetails()
+				print(bicycle)
 		else:
 			print("No bicycles in stock")
 
@@ -38,34 +38,32 @@ class Customer(object):
 	def __init__(self, name, fund):
 		self.name = name
 		self.fund = fund
-		self.bicycle = object
+		self.bicycle = None
 
 	def buyBicycle(self, bicycle):
 		if self.fund > bicycle.cost:
 			self.bicycle = bicycle
 			self.fund -= bicycle.cost
-		else:
-			pass
+
 
 	def showStuff(self):
 		print("name: {} \nfund : {}\nbicycle : {}\n".format(self.name, 
 			self.fund, self.bicycle.model))
 
 def sellBike(store, customer):
-	potential_bike = []
+	potential_bikes = []
 	for bike in store.bicycles:
 		if bike.cost <= customer.fund:
-			potential_bike.append(bike)
+			potential_bikes.append(bike)
 
 #Can I do this better?
 	print("{} can afford these bikes: {}\n".format(customer.name, 
-		potential_bike))
+		potential_bikes))
 
-	if len(potential_bike) > 0:
-		bikeToPurchase = random.choice(potential_bike)
+	if potential_bikes:
+		bikeToPurchase = random.choice(potential_bikes)
 		store.sellBicycle(bikeToPurchase)
 		customer.buyBicycle(bikeToPurchase)
 	else:
 		print("No Bikes to Sell to {}".format(customer.name))
-
 
