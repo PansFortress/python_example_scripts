@@ -16,9 +16,10 @@ ingredients = {
 	"bitter": ["shake of bitters", "splash of tonic", "twist of lemon peel"],
 }
 
-answers = {}
 
 def raise_questions():
+	answers = {}
+
 	acceptable = ["yes", "y"]
 	for item in questions:
 		holder = input(questions[item] + " ")
@@ -26,16 +27,16 @@ def raise_questions():
 			answers[item] = True
 		else:
 			answers[item] = False
+	return answers
 
 #How should i name params with same names as global variables?
-def make_drink(_answers):
+def make_drink(answers):
 	drink = []
-	for item in _answers:
-		if _answers[item]:
+	for item in answers:
+		if answers[item]:
 			drink.append(random.choice(ingredients[item]))
 	return drink
 
 if __name__ == "__main__":
-	raise_questions();	
-	drink = " ".join(make_drink(answers))
+	drink = " ".join(make_drink(raise_questions()))
 	print(drink)
